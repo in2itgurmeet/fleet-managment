@@ -1,0 +1,75 @@
+<div class="dashboard-wrapper" [class.sidebar-collapsed]="isSidebarCollapsed" [class.dark-theme]="isDarkTheme">
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+
+  <!-- Render Shared Sidebar Component -->
+  <app-sidebar [isCollapsed]="isSidebarCollapsed" [isMobileOpen]="isMobileMenuOpen"
+    (closeMobile)="closeMobileMenu()"></app-sidebar>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header class="top-header">
+      <div class="header-left">
+        <button class="toggle-btn" (click)="toggleSidebar()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search shipments, orders, customers...">
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="icon-btn" (click)="toggleTheme()" title="Toggle Theme">
+          <i class="fa-solid" [ngClass]="isDarkTheme ? 'fa-sun' : 'fa-moon'"></i>
+        </button>
+        <button class="icon-btn" (click)="reloadPage()" title="Reload">
+          <i class="fa-solid fa-rotate-right"></i>
+        </button>
+        <button class="icon-btn notification-btn">
+          <i class="fa-solid fa-bell"></i>
+          <span class="badge">3</span>
+        </button>
+        <div class="profile-dropdown" (click)="toggleProfileMenu()">
+          <img src="assets/images/avatar.jpg" alt="Profile" class="avatar"
+            onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">
+          <div class="profile-info">
+            <span class="name">Jenus Ana</span>
+            <span class="role">Administrator</span>
+          </div>
+          <i class="fa-solid fa-chevron-down text-muted" style="font-size: 0.8rem; margin-left: 5px;"></i>
+
+          <!-- Profile Dropdown Menu Card -->
+          <div class="profile-menu-card" *ngIf="isProfileMenuOpen" (click)="$event.stopPropagation()">
+            <div class="menu-header">
+              <img src="assets/images/avatar.jpg" alt="Profile" class="menu-avatar"
+                onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">
+              <div class="menu-user-info">
+                <span class="menu-name">Jenus Ana</span>
+                <span class="menu-email">admin@Parcelix.com</span>
+              </div>
+            </div>
+            <div class="menu-links">
+              <a routerLink="/settings/profile" class="menu-link" (click)="toggleProfileMenu()">
+                <i class="fa-regular fa-user"></i> My Profile
+              </a>
+              <a routerLink="/settings" class="menu-link" (click)="toggleProfileMenu()">
+                <i class="fa-solid fa-gear"></i> Settings
+              </a>
+            </div>
+            <div class="menu-footer">
+              <button class="logout-btn" (click)="toggleProfileMenu()">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-body custom-scrollbar">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<aside class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
+    <div class="sidebar-header">
+        <div class="logo">
+            <i class="fa-solid fa-box-open logo-icon"></i>
+            <span class="logo-text" *ngIf="!isCollapsed">Parcelix</span>
+        </div>
+        <button class="close-mobile-btn" (click)="closeMobile.emit()" *ngIf="isMobileOpen">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="sidebar-scrollable custom-scrollbar">
+        <div class="sidebar-menu">
+            <div class="menu-section" *ngFor="let section of menuSections">
+                <span class="section-title" *ngIf="!isCollapsed">{{section.title}}</span>
+
+                <ng-container *ngFor="let item of section.items">
+                    <a class="menu-item" *ngIf="!item.children || item.children.length === 0" [routerLink]="item.route"
+                        routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="onMenuClick()">
+                        <i [class]="item.icon"></i>
+                        <span class="menu-text" *ngIf="!isCollapsed">{{item.title}}</span>
+                    </a>
+
+                    <!-- Items with children (Dropdown) -->
+                    <div class="menu-dropdown-container" *ngIf="item.children && item.children.length > 0"
+                        [class.active]="isMenuActive(item) && !isCollapsed">
+                        <a class="menu-item" (click)="toggleMenu(item)">
+                            <i [class]="item.icon"></i>
+                            <span class="menu-text" *ngIf="!isCollapsed">{{item.title}}</span>
+                            <i class="fa-solid fa-chevron-down arrow" *ngIf="!isCollapsed"
+                                [class.rotated]="item.isOpen"></i>
+                        </a>
+
+                        <!-- Submenu -->
+                        <div class="submenu" *ngIf="item.isOpen && !isCollapsed">
+                            <a class="submenu-item" *ngFor="let child of item.children" [routerLink]="child.route"
+                                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="onMenuClick()">{{child.title}}</a>
+                        </div>
+                    </div>
+
+                </ng-container>
+            </div>
+
+        </div>
+
+        <!-- Need Help Footer -->
+        <div class="sidebar-footer" *ngIf="!isCollapsed">
+            <div class="help-box">
+                <i class="fa-solid fa-life-ring"></i>
+                <div class="help-text">
+                    <strong>Need help?</strong>
+                    <span>Visit support center</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

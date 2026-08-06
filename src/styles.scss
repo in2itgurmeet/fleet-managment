@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Light Theme (Default) */
+  --primary-color: #00b14f; /* Modern green matching the screenshot */
+  --bg-color: #f4f6f8;
+  --sidebar-bg: #ffffff;
+  --text-color: #333333;
+  --text-muted: #888888;
+  --border-color: #e2e8f0;
+  --header-bg: #ffffff;
+  --card-bg: #ffffff;
+  
+  /* Additional Accents */
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --info-color: #3b82f6;
+  
+  --font-family: 'Inter', sans-serif;
+}
+
+body.dark-theme {
+  /* Dark Theme */
+  --bg-color: #0f172a;
+  --sidebar-bg: #1e293b;
+  --text-color: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --header-bg: #1e293b;
+  --card-bg: #1e293b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global utility classes */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
