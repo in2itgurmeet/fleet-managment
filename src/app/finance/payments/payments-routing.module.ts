@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Transactions } from './transactions/transactions';
-import { CodManagement } from './cod-management/cod-management';
-import { Invoices } from './invoices/invoices';
+import { TransactionsComponent } from './transactions/transactions';
+import { CodManagementComponent } from './cod-management/cod-management';
+import { InvoicesComponent } from './invoices/invoices';
 
 const routes: Routes = [
-  { path: 'transactions', component: Transactions },
-  { path: 'cod-management', component: CodManagement },
-  { path: 'invoices', component: Invoices },
+  { path: 'transactions', component: TransactionsComponent },
+  { path: 'cod-management', component: CodManagementComponent },
+  { path: 'invoices', component: InvoicesComponent },
   { path: '', redirectTo: 'transactions', pathMatch: 'full' }
 ];
 

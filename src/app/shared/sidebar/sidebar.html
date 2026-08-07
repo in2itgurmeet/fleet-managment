@@ -20,8 +20,6 @@
                         <i [class]="item.icon"></i>
                         <span class="menu-text" *ngIf="!isCollapsed">{{item.title}}</span>
                     </a>
-
-                    <!-- Items with children (Dropdown) -->
                     <div class="menu-dropdown-container" *ngIf="item.children && item.children.length > 0"
                         [class.active]="isMenuActive(item) && !isCollapsed">
                         <a class="menu-item" (click)="toggleMenu(item)">
@@ -34,7 +32,8 @@
                         <!-- Submenu -->
                         <div class="submenu" *ngIf="item.isOpen && !isCollapsed">
                             <a class="submenu-item" *ngFor="let child of item.children" [routerLink]="child.route"
-                                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="onMenuClick()">{{child.title}}</a>
+                                routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                (click)="onMenuClick()">{{child.title}}</a>
                         </div>
                     </div>
 

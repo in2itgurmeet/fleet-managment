@@ -1,1 +1,171 @@
-<p>warehouse-list works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="icon-box" style="background-color: rgba(34, 197, 94, 0.1); color: #22c55e;">
+        <i class="fa-solid fa-warehouse"></i>
+      </div>
+      <div class="title-wrap">
+        <h1 class="page-title">Warehouse List</h1>
+        <p class="page-subtitle">Monitor capacity and utilization across every hub</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-primary" (click)="openAddModal()">
+        <i class="fa-solid fa-plus"></i> Add Warehouse
+      </button>
+      <button class="btn btn-secondary">
+        <i class="fa-solid fa-download"></i> Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <div class="stat-header">
+        <div class="stat-title-wrap" [class]="stat.colorClass">
+          <i [class]="stat.icon"></i>
+          <span>{{ stat.title }}</span>
+        </div>
+        <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      </div>
+
+      <div class="stat-body">
+        <div class="stat-value-row">
+          <h2 class="stat-value">{{ stat.value }}</h2>
+          <span class="stat-trend" [ngClass]="stat.trendUp ? 'trend-up' : 'trend-down'">
+            <i class="fa-solid" [ngClass]="stat.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
+            {{ stat.trend }}
+          </span>
+        </div>
+
+        <div class="stat-chart" [class]="stat.colorClass">
+          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+        </div>
+        <div class="stat-footer">VS last week</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-card">
+    <div class="table-toolbar">
+      <div class="tabs">
+        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+          {{ tab }}
+        </button>
+      </div>
+      <div class="toolbar-actions">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search warehouse, city...">
+        </div>
+        <button class="filter-btn">
+          <i class="fa-solid fa-filter"></i> Filter <i class="fa-solid fa-chevron-down ms-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive p-3">
+      <cats-data-grid [rowData]="warehouses" [colDefs]="colDefs" [totalRecords]="warehouses.length"
+        [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
+        [filterRequired]="false">
+        
+        <ng-template #customTemplate let-row let-col="colDef">
+          
+          <ng-container *ngIf="col.fieldName === 'name'">
+            <div class="user-cell">
+              <div class="user-info">
+                <div class="user-name">{{ row.name }}</div>
+                <div class="user-sub">{{ row.location }}</div>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'utilization'">
+            <div class="utilization-cell">
+              <div class="util-bar-bg">
+                <div class="util-bar-fill" [style.width.%]="row.utilization"
+                  [ngClass]="row.utilization > 90 ? 'bg-danger' : (row.utilization > 75 ? 'bg-warning' : 'bg-success')">
+                </div>
+              </div>
+              <span class="util-text">{{ row.utilization }}%</span>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'status'">
+            <span class="status-badge" [ngClass]="{
+              'badge-success': row.status === 'Operational',
+              'badge-warning': row.status === 'Near Full',
+              'badge-info': row.status === 'Maintenance'
+            }">{{ row.status }}</span>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'action'">
+            <button class="btn-icon">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </ng-container>
+        </ng-template>
+
+      </cats-data-grid>
+    </div>
+  </div>
+</div>
+
+<!-- Add Warehouse Modal -->
+<div class="modal-overlay" *ngIf="isAddWarehouseModalOpen" (click)="closeAddModal()">
+  <div class="custom-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title-wrapper">
+        <div class="modal-icon-box">
+          <i class="fa-solid fa-warehouse"></i>
+        </div>
+        <h3 class="modal-title">Add Warehouse</h3>
+      </div>
+      <button class="close-btn" (click)="closeAddModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Warehouse Name</label>
+          <input type="text" class="form-control" placeholder="Central Hub">
+        </div>
+        <div class="form-group half">
+          <label>Location</label>
+          <input type="text" class="form-control" placeholder="New York, NY">
+        </div>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Manager</label>
+          <input type="text" class="form-control" placeholder="Kathryn Murphy">
+        </div>
+        <div class="form-group half">
+          <label>Capacity (parcels)</label>
+          <input type="text" class="form-control" placeholder="48000">
+        </div>
+      </div>
+
+      <div class="form-group mb-4">
+        <label>Status</label>
+        <select class="form-select">
+          <option>Operational</option>
+          <option>Near Full</option>
+          <option>Maintenance</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-cancel" (click)="closeAddModal()">Cancel</button>
+        <button class="btn-submit">
+          <i class="fa-regular fa-circle-check"></i> Add Warehouse
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

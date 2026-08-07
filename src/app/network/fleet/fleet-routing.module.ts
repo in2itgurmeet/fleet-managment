@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Vehicles } from './vehicles/vehicles';
-import { VehicleMaintenance } from './vehicle-maintenance/vehicle-maintenance';
+import { VehiclesComponent } from './vehicles/vehicles';
+import { VehicleMaintenanceComponent } from './vehicle-maintenance/vehicle-maintenance';
 
 const routes: Routes = [
-  { path: 'vehicles', component: Vehicles },
-  { path: 'vehicle-maintenance', component: VehicleMaintenance },
+  { path: 'vehicles', component: VehiclesComponent },
+  { path: 'vehicle-maintenance', component: VehicleMaintenanceComponent },
   { path: '', redirectTo: 'vehicles', pathMatch: 'full' }
 ];
 

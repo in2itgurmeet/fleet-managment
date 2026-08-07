@@ -30,30 +30,30 @@ export class Sidebar implements OnInit, OnDestroy {
       title: 'LOGISTICS',
       items: [
         {
-          title: 'Shipment', icon: 'fa-solid fa-cube', route: '/shipments', isOpen: true,
+          title: 'Shipment', icon: 'fa-solid fa-cube', route: '/logistics/shipments', isOpen: true,
           children: [
-            { title: 'All Shipments', route: '/shipments/all-shipments' },
-            { title: 'Create Shipment', route: '/shipments/create' },
-            { title: 'Shipment Details', route: '/shipments/details' },
-            { title: 'Shipment Tracking', route: '/shipments/tracking' }
+            { title: 'All Shipments', route: '/logistics/shipments/all-shipments' },
+            { title: 'Create Shipment', route: '/logistics/shipments/create-shipment' },
+            { title: 'Shipment Details', route: '/logistics/shipments/shipment-details' },
+            { title: 'Shipment Tracking', route: '/logistics/shipments/shipment-tracking' }
           ]
         },
         {
-          title: 'Parcel Operations', icon: 'fa-solid fa-boxes-stacked', route: '/parcel-operations', isOpen: false,
+          title: 'Parcel Operations', icon: 'fa-solid fa-boxes-stacked', route: '/logistics/parcel-operations', isOpen: false,
           children: [
-            { title: 'Incoming Parcels', route: '/parcel-operations/incoming' },
-            { title: 'Outgoing Parcels', route: '/parcel-operations/outgoing' },
-            { title: 'Returns', route: '/parcel-operations/returns' },
-            { title: 'Failed Deliveries', route: '/parcel-operations/failed-deliveries' }
+            { title: 'Incoming Parcels', route: '/logistics/parcel-operations/incoming-parcels' },
+            { title: 'Outgoing Parcels', route: '/logistics/parcel-operations/outgoing-parcels' },
+            { title: 'Returns', route: '/logistics/parcel-operations/returns' },
+            { title: 'Failed Deliveries', route: '/logistics/parcel-operations/failed-deliveries' }
           ]
         },
         {
-          title: 'Orders', icon: 'fa-solid fa-bag-shopping', route: '/orders', isOpen: false,
+          title: 'Orders', icon: 'fa-solid fa-bag-shopping', route: '/logistics/orders', isOpen: false,
           children: [
-            { title: 'All Orders', route: '/orders/all' },
-            { title: 'New Orders', route: '/orders/new' },
-            { title: 'Processing Orders', route: '/orders/processing' },
-            { title: 'Completed Orders', route: '/orders/completed' }
+            { title: 'All Orders', route: '/logistics/orders/all-orders' },
+            { title: 'New Orders', route: '/logistics/orders/new-orders' },
+            { title: 'Processing Orders', route: '/logistics/orders/processing-orders' },
+            { title: 'Completed Orders', route: '/logistics/orders/completed-orders' }
           ]
         }
       ]
@@ -62,18 +62,18 @@ export class Sidebar implements OnInit, OnDestroy {
       title: 'PEOPLE',
       items: [
         {
-          title: 'Customers', icon: 'fa-solid fa-user-group', route: '/customers', isOpen: false,
+          title: 'Customers', icon: 'fa-solid fa-user-group', route: '/people/customers', isOpen: false,
           children: [
-            { title: 'Customer List', route: '/customers/list' },
-            { title: 'Customer Details', route: '/customers/details' }
+            { title: 'Customer List', route: '/people/customers/list' },
+            { title: 'Customer Details', route: '/people/customers/details' }
           ]
         },
         {
-          title: 'Riders & Drivers', icon: 'fa-solid fa-motorcycle', route: '/riders-drivers', isOpen: false,
+          title: 'Riders & Drivers', icon: 'fa-solid fa-motorcycle', route: '/people/riders-drivers', isOpen: false,
           children: [
-            { title: 'Rider List', route: '/riders-drivers/riders' },
-            { title: 'Driver Tracking', route: '/riders-drivers/tracking' },
-            { title: 'Performance', route: '/riders-drivers/performance' }
+            { title: 'Rider List', route: '/people/riders-drivers/riders' },
+            { title: 'Driver Tracking', route: '/people/riders-drivers/tracking' },
+            { title: 'Performance', route: '/people/riders-drivers/performance' }
           ]
         }
       ]
@@ -82,24 +82,24 @@ export class Sidebar implements OnInit, OnDestroy {
       title: 'FLEET & NETWORK',
       items: [
         {
-          title: 'Fleet', icon: 'fa-solid fa-truck', route: '/fleet', isOpen: false,
+          title: 'Fleet', icon: 'fa-solid fa-truck', route: '/network/fleet', isOpen: false,
           children: [
-            { title: 'Vehicles', route: '/fleet/vehicles' },
-            { title: 'Vehicle Maintenance', route: '/fleet/vehicle-maintenance' }
+            { title: 'Vehicles', route: '/network/fleet/vehicles' },
+            { title: 'Vehicle Maintenance', route: '/network/fleet/vehicle-maintenance' }
           ]
         },
         {
-          title: 'Routes', icon: 'fa-solid fa-route', route: '/routes', isOpen: false,
+          title: 'Routes', icon: 'fa-solid fa-route', route: '/network/routes', isOpen: false,
           children: [
-            { title: 'Route Planning', route: '/routes/planning' },
-            { title: 'Route Optimization', route: '/routes/optimization' }
+            { title: 'Route Planning', route: '/network/routes/planning' },
+            { title: 'Route Optimization', route: '/network/routes/optimization' }
           ]
         },
         {
-          title: 'Warehouses', icon: 'fa-solid fa-warehouse', route: '/warehouses', isOpen: false,
+          title: 'Warehouses', icon: 'fa-solid fa-warehouse', route: '/network/warehouses', isOpen: false,
           children: [
-            { title: 'Warehouse List', route: '/warehouses/list' },
-            { title: 'Inventory', route: '/warehouses/inventory' }
+            { title: 'Warehouse List', route: '/network/warehouses/list' },
+            { title: 'Inventory', route: '/network/warehouses/inventory' }
           ]
         }
       ]
@@ -108,19 +108,19 @@ export class Sidebar implements OnInit, OnDestroy {
       title: 'FINANCE',
       items: [
         {
-          title: 'Payments', icon: 'fa-regular fa-credit-card', route: '/payments', isOpen: false,
+          title: 'Payments', icon: 'fa-regular fa-credit-card', route: '/finance/payments', isOpen: false,
           children: [
-            { title: 'Transactions', route: '/payments/transactions' },
-            { title: 'COD Management', route: '/payments/cod-management' },
-            { title: 'Invoices', route: '/payments/invoices' }
+            { title: 'Transactions', route: '/finance/payments/transactions' },
+            { title: 'COD Management', route: '/finance/payments/cod-management' },
+            { title: 'Invoices', route: '/finance/payments/invoices' }
           ]
         },
         {
-          title: 'Reports', icon: 'fa-solid fa-chart-column', route: '/reports', isOpen: false,
+          title: 'Reports', icon: 'fa-solid fa-chart-column', route: '/finance/reports', isOpen: false,
           children: [
-            { title: 'Delivery Reports', route: '/reports/delivery' },
-            { title: 'Revenue Reports', route: '/reports/revenue' },
-            { title: 'Rider Reports', route: '/reports/riders' }
+            { title: 'Delivery Reports', route: '/finance/reports/delivery' },
+            { title: 'Revenue Reports', route: '/finance/reports/revenue' },
+            { title: 'Rider Reports', route: '/finance/reports/riders' }
           ]
         }
       ]
@@ -128,8 +128,8 @@ export class Sidebar implements OnInit, OnDestroy {
     {
       title: 'SYSTEM',
       items: [
-        { title: 'Settings', icon: 'fa-solid fa-gear', route: '/settings', children: [], isOpen: false },
-        { title: 'Support', icon: 'fa-solid fa-headset', route: '/support', children: [], isOpen: false }
+        { title: 'Settings', icon: 'fa-solid fa-gear', route: '/system/settings', children: [], isOpen: false },
+        { title: 'Support', icon: 'fa-solid fa-headset', route: '/system/support', children: [], isOpen: false }
       ]
     }
   ];

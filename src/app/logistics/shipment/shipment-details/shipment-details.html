@@ -1,1 +1,158 @@
-<p>shipment-details works!</p>
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button class="btn btn-icon btn-back" routerLink="/logistics/shipments/all-shipments">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="title-wrap">
+        <div class="title-row">
+          <h1 class="page-title">Shipment {{ shipment.id }}</h1>
+          <span class="badge badge-info">{{ shipment.status }}</span>
+        </div>
+        <p class="page-subtitle">Created {{ shipment.createdDate }} · Estimated {{ shipment.estimatedDate }}</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-primary btn-track">
+        <i class="fa-solid fa-location-arrow"></i> Track Live
+      </button>
+      <button class="btn btn-secondary">
+        <i class="fa-solid fa-print"></i> Print Label
+      </button>
+    </div>
+  </div>
+
+  <!-- Metrics Grid -->
+  <div class="metrics-grid">
+    <div class="card metric-card">
+      <div class="metric-header">
+        <i class="fa-solid fa-bolt text-primary"></i>
+        <span class="metric-label">Service</span>
+      </div>
+      <div class="metric-value">{{ shipment.service }}</div>
+    </div>
+    <div class="card metric-card">
+      <div class="metric-header">
+        <i class="fa-solid fa-scale-balanced text-success"></i>
+        <span class="metric-label">Weight</span>
+      </div>
+      <div class="metric-value">{{ shipment.weight }}</div>
+    </div>
+    <div class="card metric-card">
+      <div class="metric-header">
+        <i class="fa-solid fa-money-bill-wave text-warning"></i>
+        <span class="metric-label">COD</span>
+      </div>
+      <div class="metric-value">{{ shipment.cod }}</div>
+    </div>
+    <div class="card metric-card">
+      <div class="metric-header">
+        <i class="fa-solid fa-route text-info"></i>
+        <span class="metric-label">Distance</span>
+      </div>
+      <div class="metric-value">{{ shipment.distance }}</div>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    
+    <!-- Left Column (Larger) -->
+    <div class="left-column">
+      
+      <!-- Tracking History -->
+      <div class="card tracking-card">
+        <div class="card-header">
+          <i class="fa-solid fa-timeline text-success"></i>
+          <h2 class="card-title">Tracking History</h2>
+        </div>
+        <div class="card-body">
+          <div class="timeline">
+            <div class="timeline-event" *ngFor="let event of trackingEvents; let i = index" [class.active]="event.isActive">
+              <div class="timeline-indicator" [style.border-color]="event.color"></div>
+              <div class="timeline-content">
+                <div class="timeline-title" [style.color]="event.isActive ? 'var(--primary-color)' : 'var(--text-color)'">
+                  {{ event.status }}
+                </div>
+                <div class="timeline-desc">{{ event.description }}</div>
+                <div class="timeline-time">{{ event.date }} · {{ event.time }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parcel Contents -->
+      <div class="card parcel-card">
+        <div class="card-header">
+          <i class="fa-solid fa-list text-success"></i>
+          <h2 class="card-title">Parcel Contents</h2>
+        </div>
+        <div class="card-body p-3">
+          <cats-data-grid [rowData]="parcelItems" [colDefs]="colDefs" [totalRecords]="parcelItems.length"
+            [paginationRequired]="false" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="false"
+            [filterRequired]="false">
+          </cats-data-grid>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column (Smaller) -->
+    <div class="right-column">
+      
+      <!-- Assigned Rider -->
+      <div class="card side-card rider-card">
+        <div class="card-header-small">ASSIGNED RIDER</div>
+        <div class="card-body">
+          <div class="rider-profile">
+            <img [src]="rider.image" alt="Rider" class="rider-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Marcus+Bell&background=random'">
+            <div class="rider-details">
+              <div class="rider-name">{{ rider.name }}</div>
+              <div class="rider-vehicle">{{ rider.vehicle }} · {{ rider.zone }} · <i class="fa-solid fa-star text-warning"></i> {{ rider.rating }}</div>
+            </div>
+          </div>
+          <div class="rider-actions">
+            <button class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-phone"></i> Call</button>
+            <button class="btn btn-outline-secondary btn-sm"><i class="fa-regular fa-comment-dots"></i> Chat</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sender/Recipient -->
+      <div class="card side-card parties-card">
+        <div class="card-body">
+          <div class="party-section">
+            <div class="card-header-small">SENDER</div>
+            <div class="party-name">{{ parties.sender.name }}</div>
+            <div class="party-address">{{ parties.sender.address }}</div>
+            <div class="party-phone">{{ parties.sender.phone }}</div>
+          </div>
+          <hr class="card-divider">
+          <div class="party-section">
+            <div class="card-header-small">RECIPIENT</div>
+            <div class="party-name">{{ parties.recipient.name }}</div>
+            <div class="party-address">{{ parties.recipient.address }}</div>
+            <div class="party-phone">{{ parties.recipient.phone }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Location -->
+      <div class="card side-card location-card">
+        <div class="card-header-small" style="padding: 15px 15px 0 15px;">LIVE LOCATION</div>
+        <div class="card-body p-0">
+          <div class="map-container">
+            <img src="https://static-maps.yandex.ru/1.x/?lang=en_US&ll=-73.9854,40.7488&z=14&l=map&size=400,200&pt=-73.9854,40.7488,pm2blm" alt="Map" class="map-img">
+            <div class="map-footer">
+              <i class="fa-solid fa-location-crosshairs"></i> Last ping: 3.4 mi away
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

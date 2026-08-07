@@ -1,1 +1,131 @@
-<p>delivery-reports works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="icon-box" style="background-color: rgba(34, 197, 94, 0.1); color: #22c55e;">
+        <i class="fa-solid fa-chart-line"></i>
+      </div>
+      <div class="title-wrap">
+        <h1 class="page-title">Delivery Reports</h1>
+        <p class="page-subtitle">Delivery performance and success metrics over time</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="dropdown me-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <i class="fa-regular fa-calendar me-2"></i> {{ selectedDateFilter }}
+        </button>
+        <ul class="dropdown-menu">
+          <li *ngFor="let filter of dateFilters">
+            <a class="dropdown-item" href="javascript:void(0)" (click)="setDateFilter(filter)">{{ filter }}</a>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-secondary">
+        <i class="fa-solid fa-download"></i> Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <div class="stat-header">
+        <div class="stat-title-wrap" [class]="stat.colorClass">
+          <i [class]="stat.icon"></i>
+          <span>{{ stat.title }}</span>
+        </div>
+        <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      </div>
+
+      <div class="stat-body">
+        <div class="stat-value-row">
+          <h2 class="stat-value">{{ stat.value }}</h2>
+          <span class="stat-trend" [ngClass]="stat.trendUp ? 'trend-up' : 'trend-down'">
+            <i class="fa-solid" [ngClass]="stat.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
+            {{ stat.trend }}
+          </span>
+        </div>
+
+        <div class="stat-chart" [class]="stat.colorClass">
+          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+        </div>
+        <div class="stat-footer">VS last week</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="charts-row mb-4">
+    <div class="chart-card line-chart-card">
+      <div class="card-header border-0 pb-0">
+        <h5 class="card-title fs-6">
+          <i class="fa-solid fa-chart-column text-success me-2"></i> Deliveries Over Time
+        </h5>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="dot bg-success"></span> Delivered</span>
+          <span class="legend-item"><span class="dot bg-danger"></span> Failed</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="chart-container" style="height: 300px; position: relative;">
+          <canvas #lineChart></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card doughnut-chart-card">
+      <div class="card-header border-0 pb-0">
+        <h5 class="card-title fs-6">
+          <i class="fa-solid fa-chart-pie text-success me-2"></i> Status Breakdown
+        </h5>
+      </div>
+      <div class="card-body d-flex flex-column align-items-center">
+        <div class="chart-container" style="height: 220px; width: 100%; position: relative;">
+          <canvas #doughnutChart></canvas>
+        </div>
+        <div class="doughnut-legend mt-4 w-100 px-3">
+          <div class="row w-100 m-0">
+            <div class="col-6 mb-2"><span class="legend-item"><span class="dot bg-success"></span> Delivered</span>
+            </div>
+            <div class="col-6 mb-2"><span class="legend-item"><span class="dot bg-primary"></span> In Transit</span>
+            </div>
+            <div class="col-6"><span class="legend-item"><span class="dot bg-danger"></span> Failed</span></div>
+            <div class="col-6"><span class="legend-item"><span class="dot bg-warning"></span> Returned</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-card mt-4">
+    <div class="card-header border-0 bg-transparent py-3 px-4">
+      <h5 class="card-title fs-6 mb-0">
+        <i class="fa-solid fa-location-dot text-success me-2"></i> Performance by Zone
+      </h5>
+    </div>
+
+    <div class="table-responsive p-3 pt-0">
+      <cats-data-grid [rowData]="zoneData" [colDefs]="colDefs" [totalRecords]="zoneData.length"
+        [paginationRequired]="false" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="false"
+        [filterRequired]="false">
+
+        <ng-template #customTemplate let-row let-col="colDef">
+
+          <ng-container *ngIf="col.fieldName === 'zone'">
+            <span class="font-weight-bold">{{ row.zone }}</span>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'trend'">
+            <span class="stat-trend" [ngClass]="row.trendUp ? 'trend-up' : 'trend-down'">
+              <i class="fa-solid" [ngClass]="row.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
+              {{ row.trend }}
+            </span>
+          </ng-container>
+
+        </ng-template>
+
+      </cats-data-grid>
+    </div>
+  </div>
+</div>

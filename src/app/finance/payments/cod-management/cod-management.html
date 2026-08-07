@@ -1,1 +1,94 @@
-<p>cod-management works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="icon-box" style="background-color: rgba(34, 197, 94, 0.1); color: #22c55e;">
+        <i class="fa-solid fa-money-bill"></i>
+      </div>
+      <div class="title-wrap">
+        <h1 class="page-title">COD Management</h1>
+        <p class="page-subtitle">Track cash on delivery collections and rider remittances</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary">
+        <i class="fa-solid fa-download"></i> Export
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of stats">
+      <div class="stat-header">
+        <div class="stat-title-wrap" [class]="stat.colorClass">
+          <i [class]="stat.icon"></i>
+          <span>{{ stat.title }}</span>
+        </div>
+        <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+      </div>
+
+      <div class="stat-body">
+        <div class="stat-value-row">
+          <h2 class="stat-value">{{ stat.value }}</h2>
+          <span class="stat-trend" [ngClass]="stat.trendUp ? 'trend-up' : 'trend-down'">
+            <i class="fa-solid" [ngClass]="stat.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
+            {{ stat.trend }}
+          </span>
+        </div>
+
+        <div class="stat-chart" [class]="stat.colorClass">
+          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+        </div>
+        <div class="stat-footer">VS last week</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Section -->
+  <div class="table-card">
+    <div class="table-toolbar">
+      <div class="tabs">
+        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+          {{ tab }}
+        </button>
+      </div>
+      <div class="toolbar-actions">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search tracking ID, rider...">
+        </div>
+        <button class="filter-btn">
+          <i class="fa-solid fa-filter"></i> Filter <i class="fa-solid fa-chevron-down ms-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-responsive p-3">
+      <cats-data-grid [rowData]="collections" [colDefs]="colDefs" [totalRecords]="collections.length"
+        [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
+        [filterRequired]="false">
+        
+        <ng-template #customTemplate let-row let-col="colDef">
+          
+          <ng-container *ngIf="col.fieldName === 'id'">
+            <span class="font-weight-bold">{{ row.id }}</span>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'amount'">
+            <span class="font-weight-bold">{{ row.amount }}</span>
+          </ng-container>
+
+          <ng-container *ngIf="col.fieldName === 'status'">
+            <span class="status-badge" [ngClass]="{
+              'badge-success': row.status === 'Collected',
+              'badge-warning': row.status === 'Pending',
+              'badge-danger': row.status === 'Discrepancy',
+              'badge-info': row.status === 'Remitted'
+            }">{{ row.status }}</span>
+          </ng-container>
+
+        </ng-template>
+      </cats-data-grid>
+    </div>
+  </div>
+</div>

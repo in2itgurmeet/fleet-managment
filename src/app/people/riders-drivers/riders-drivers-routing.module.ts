@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RiderList } from './rider-list/rider-list';
+import { RiderListComponent } from './rider-list/rider-list';
 import { DriverTracking } from './driver-tracking/driver-tracking';
-import { Performance } from './performance/performance';
+import { PerformanceComponent } from './performance/performance';
 
 const routes: Routes = [
-  { path: 'riders', component: RiderList },
+  { path: 'riders', component: RiderListComponent },
   { path: 'tracking', component: DriverTracking },
-  { path: 'performance', component: Performance },
+  { path: 'performance', component: PerformanceComponent },
   { path: '', redirectTo: 'riders', pathMatch: 'full' }
 ];
 

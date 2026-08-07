@@ -1,0 +1,229 @@
+@import '../../../../styles/mixins';
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  animation: fadeIn 0.3s ease-out;
+  padding-bottom: 40px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .btn-back {
+      background-color: var(--card-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 0;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .title-wrap {
+      .page-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin: 0 0 4px 0;
+      }
+
+      .page-subtitle {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+      }
+    }
+  }
+}
+
+/* Form Layout Grid */
+.form-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  align-items: start;
+
+  @include respond-to('mobile') {
+    grid-template-columns: 1fr;
+  }
+
+  @include respond-to('tablet') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.summary-column {
+  position: relative;
+
+  .sticky-card {
+    position: sticky;
+    top: 25px;
+  }
+}
+
+/* Section Cards */
+.section-card {
+  padding: 0.25rem;
+  border-radius: 17px !important;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: transparent !important;
+    border-bottom: none !important;
+
+    .icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 15px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+
+      &.sender-icon {
+        background-color: rgba(34, 197, 94, 0.1);
+        color: #22c55e;
+      }
+
+      &.recipient-icon {
+        background-color: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+      }
+
+      &.parcel-icon {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: #10b981;
+      }
+
+      &.service-icon {
+        background-color: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+      }
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0;
+      color: var(--text-color);
+    }
+  }
+}
+
+/* Form Rows */
+.form-row {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 1rem;
+
+  &.grid-2 {
+    grid-template-columns: 1fr 1fr;
+
+    @include respond-to('mobile') {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &.grid-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    @include respond-to('mobile') {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* Cost Breakdown */
+.cost-breakdown {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+
+    .cost-label {
+      color: var(--text-muted);
+    }
+
+    .cost-value {
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    &.total-row {
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 1px dashed var(--border-color);
+
+      .cost-label {
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .cost-value {
+        font-size: 1.1rem;
+        font-weight: 700;
+
+        &.text-success {
+          color: var(--success-color);
+        }
+      }
+    }
+  }
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .btn-block {
+    width: 100%;
+    padding: 0.85rem;
+    border-radius: 20px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

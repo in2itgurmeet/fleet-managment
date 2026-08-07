@@ -1,17 +1,11 @@
 <div class="dashboard-wrapper" [class.sidebar-collapsed]="isSidebarCollapsed" [class.dark-theme]="isDarkTheme">
-
-  <!-- Mobile Overlay -->
   <div class="mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
-
-  <!-- Render Shared Sidebar Component -->
   <app-sidebar [isCollapsed]="isSidebarCollapsed" [isMobileOpen]="isMobileMenuOpen"
     (closeMobile)="closeMobileMenu()"></app-sidebar>
-
-  <!-- Main Content Area -->
   <div class="main-content">
     <header class="top-header">
       <div class="header-left">
-        <button class="toggle-btn" (click)="toggleSidebar()">
+        <button class="menu-toggle" (click)="toggleSidebar()">
           <i class="fa-solid fa-bars"></i>
         </button>
         <div class="search-bar">
@@ -27,10 +21,35 @@
         <button class="icon-btn" (click)="reloadPage()" title="Reload">
           <i class="fa-solid fa-rotate-right"></i>
         </button>
-        <button class="icon-btn notification-btn">
-          <i class="fa-solid fa-bell"></i>
-          <span class="badge">3</span>
-        </button>
+        <div class="notification-dropdown-wrapper" (click)="toggleNotifications()">
+          <button class="icon-btn notification-btn">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          
+          <!-- Notifications Dropdown -->
+          <div class="notification-menu-card" *ngIf="isNotificationsOpen" (click)="$event.stopPropagation()">
+            <div class="notif-header">
+              <span class="notif-title">Notifications</span>
+              <button class="mark-read-btn">Mark all read</button>
+            </div>
+            <div class="notif-list">
+              <div class="notif-item" *ngFor="let notif of notifications">
+                <div class="notif-icon-box" [ngClass]="notif.type">
+                  <i [class]="notif.icon"></i>
+                </div>
+                <div class="notif-content">
+                  <div class="notif-item-title">{{ notif.title }}</div>
+                  <div class="notif-item-desc">{{ notif.desc }}</div>
+                  <div class="notif-item-time">{{ notif.time }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="notif-footer">
+              <button class="view-all-btn">View all notifications</button>
+            </div>
+          </div>
+        </div>
         <div class="profile-dropdown" (click)="toggleProfileMenu()">
           <img src="assets/images/avatar.jpg" alt="Profile" class="avatar"
             onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">

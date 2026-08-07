@@ -1,1 +1,153 @@
-<p>customer-details works!</p>
+<div class="page-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-left">
+      <button class="btn btn-back" (click)="goBack()">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="title-wrap">
+        <div class="title-row">
+          <h1 class="page-title">{{ customer.name }}</h1>
+          <span class="badge-info ms-2" *ngIf="customer.status === 'VIP'">VIP</span>
+        </div>
+        <p class="page-subtitle">Customer since {{ customer.since }} - {{ customer.status }}</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> New Shipment
+      </button>
+      <button class="btn btn-secondary">
+        <i class="fa-solid fa-pencil"></i> Edit
+      </button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Left Column -->
+    <div class="left-column">
+
+      <!-- Profile Card -->
+      <div class="card profile-card mb-4">
+        <div class="profile-layout">
+          <div class="avatar-section">
+            <img [src]="customer.avatar" alt="Avatar" class="profile-avatar"
+              onerror="this.src='https://ui-avatars.com/api/?name=' + customer.name + '&background=random'">
+          </div>
+          <div class="details-section">
+            <div class="name-row">
+              <h2 class="profile-name">{{ customer.name }}</h2>
+              <span class="profile-id">{{ customer.status }} Customer - ID #{{ customer.id }}</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-item"><i class="fa-solid fa-envelope"></i> {{ customer.email }}</span>
+              <span class="contact-item"><i class="fa-solid fa-phone"></i> {{ customer.phone }}</span>
+            </div>
+            <div class="address-row">
+              <span class="contact-item"><i class="fa-solid fa-location-dot"></i> {{ customer.address }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card card" *ngFor="let stat of stats">
+          <div class="metric-header">
+            <span>{{ stat.title }}</span>
+          </div>
+          <div class="metric-body">
+            <div class="metric-value-row">
+              <h3 class="metric-value">{{ stat.value }}</h3>
+              <span class="metric-trend" [ngClass]="stat.trendUp ? 'trend-up' : 'trend-down'">
+                <i class="fa-solid" [ngClass]="stat.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
+                {{ stat.trend }}
+              </span>
+            </div>
+            <div class="metric-chart" [class]="stat.colorClass">
+              <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders Card -->
+      <div class="card parcel-card mt-4">
+        <div class="card-header">
+          <i class="fa-solid fa-box-open text-success"></i>
+          <h2 class="card-title">Recent Orders</h2>
+        </div>
+        <div class="card-body p-3">
+          <cats-data-grid [rowData]="recentOrders" [colDefs]="colDefs" [totalRecords]="recentOrders.length"
+            [paginationRequired]="false" [sortingRequired]="false" [selectedRowEmpty]="true" [draggable]="false"
+            [filterRequired]="false">
+          </cats-data-grid>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+
+      <!-- Contact Card -->
+      <div class="card side-card contact-card">
+        <div class="card-header-small">CONTACT</div>
+        <div class="card-body">
+          <div class="contact-section">
+            <div class="contact-label"><i class="fa-solid fa-phone"></i> Phone</div>
+            <div class="contact-val">{{ customer.phone }}</div>
+          </div>
+          <div class="contact-section">
+            <div class="contact-label"><i class="fa-solid fa-envelope"></i> Email</div>
+            <div class="contact-val">{{ customer.email }}</div>
+          </div>
+          <div class="contact-section">
+            <div class="contact-label"><i class="fa-solid fa-location-dot"></i> Address</div>
+            <div class="contact-val">{{ customer.address }}</div>
+          </div>
+
+          <div class="contact-actions mt-3">
+            <button class="btn btn-secondary w-50"><i class="fa-solid fa-phone"></i> Call</button>
+            <button class="btn btn-secondary w-50"><i class="fa-solid fa-comment"></i> Chat</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delivery Preferences Card -->
+      <div class="card side-card pref-card">
+        <div class="card-header-small">DELIVERY PREFERENCES</div>
+        <div class="card-body">
+          <div class="pref-row">
+            <span class="pref-label">Preferred time</span>
+            <span class="pref-val font-weight-bold">{{ customer.preferences.time }}</span>
+          </div>
+          <div class="pref-row mt-3">
+            <span class="pref-label">Drop-off note</span>
+            <span class="pref-val font-weight-bold">{{ customer.preferences.note }}</span>
+          </div>
+          <div class="pref-row mt-3">
+            <span class="pref-label">Payment</span>
+            <span class="pref-val font-weight-bold">{{ customer.preferences.payment }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Location Card -->
+      <div class="card side-card location-card">
+        <div class="card-header-small mb-0 pt-3 px-3 pb-2">LOCATION</div>
+        <div class="card-body p-0">
+          <div class="map-container">
+            <img
+              src="https://static-maps.yandex.ru/1.x/?lang=en_US&ll=-73.9854,40.7488&z=14&l=map&size=400,200&pt=-73.9854,40.7488,pm2blm"
+              alt="Map" class="map-img">
+            <div class="map-footer">
+              <i class="fa-solid fa-location-dot"></i> {{ customer.address }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

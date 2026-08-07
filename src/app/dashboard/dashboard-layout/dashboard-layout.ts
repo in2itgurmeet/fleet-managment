@@ -14,7 +14,14 @@ export class DashboardLayout {
   isSidebarCollapsed = false;
   isMobileMenuOpen = false;
   isProfileMenuOpen = false;
+  isNotificationsOpen = false;
   isDarkTheme = false;
+
+  notifications = [
+    { title: 'Parcel Delivered', desc: 'PP-48213 delivered to Kathryn Murphy', time: '2 min ago', type: 'success', icon: 'fa-solid fa-circle-check' },
+    { title: 'Failed Delivery', desc: 'PP-47990 — recipient not available', time: '15 min ago', type: 'warning', icon: 'fa-solid fa-triangle-exclamation' },
+    { title: 'New Order', desc: 'Robert Johnson placed order #PP-48260', time: '1 hour ago', type: 'info', icon: 'fa-solid fa-user-plus' }
+  ];
 
   toggleSidebar() {
     if (window.innerWidth <= 768) {
@@ -30,6 +37,12 @@ export class DashboardLayout {
 
   toggleProfileMenu() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen;
+    if (this.isProfileMenuOpen) this.isNotificationsOpen = false;
+  }
+
+  toggleNotifications() {
+    this.isNotificationsOpen = !this.isNotificationsOpen;
+    if (this.isNotificationsOpen) this.isProfileMenuOpen = false;
   }
 
   toggleTheme() {

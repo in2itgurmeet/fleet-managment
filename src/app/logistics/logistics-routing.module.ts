@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // The shipment module is already loaded at /shipments via app.routes.ts, 
-  // so we can just leave this empty or route it appropriately if needed.
+  { path: 'shipments', loadChildren: () => import('./shipment/shipment.module').then(m => m.ShipmentModule) },
+  { path: 'parcel-operations', loadChildren: () => import('./parcel-operations/parcel-operations.module').then(m => m.ParcelOperationsModule) },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+  { path: '', redirectTo: 'shipments', pathMatch: 'full' }
 ];
 
 @NgModule({

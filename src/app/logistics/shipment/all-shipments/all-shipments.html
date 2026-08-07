@@ -1,5 +1,4 @@
 <div class="page-container">
-  <!-- Page Header -->
   <div class="page-header">
     <div class="header-content">
       <div class="icon-box">
@@ -30,7 +29,7 @@
         </div>
         <button class="more-btn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
       </div>
-      
+
       <div class="stat-body">
         <div class="stat-value-row">
           <h2 class="stat-value">{{ stat.value }}</h2>
@@ -39,7 +38,7 @@
             {{ stat.trend }}
           </span>
         </div>
-        
+
         <div class="stat-chart" [class]="stat.colorClass">
           <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
         </div>
@@ -52,11 +51,7 @@
   <div class="table-card">
     <div class="table-toolbar">
       <div class="tabs">
-        <button 
-          class="tab-btn" 
-          *ngFor="let tab of tabs" 
-          [class.active]="activeTab === tab"
-          (click)="setTab(tab)">
+        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
           {{ tab }}
         </button>
       </div>
@@ -72,14 +67,8 @@
     </div>
 
     <div class="table-responsive p-3">
-      <cats-data-grid 
-        [rowData]="shipments" 
-        [colDefs]="colDefs" 
-        [totalRecords]="shipments.length" 
-        [paginationRequired]="true" 
-        [sortingRequired]="true"
-        [selectedRowEmpty]="true"
-        [draggable]="true"
+      <cats-data-grid [rowData]="shipments" [colDefs]="colDefs" [totalRecords]="shipments.length"
+        [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
         [filterRequired]="false">
       </cats-data-grid>
     </div>

@@ -9,16 +9,10 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
       { path: 'logistics', loadChildren: () => import('./logistics/logistics.module').then(m => m.LogisticsModule) },
-      { path: 'shipments', loadChildren: () => import('./logistics/shipment/shipment.module').then(m => m.ShipmentModule) },
-      { path: 'customers', loadChildren: () => import('./people/customers/customers.module').then(m => m.CustomersModule) },
-      { path: 'riders-drivers', loadChildren: () => import('./people/riders-drivers/riders-drivers.module').then(m => m.RidersDriversModule) },
-      { path: 'fleet', loadChildren: () => import('./network/fleet/fleet.module').then(m => m.FleetModule) },
-      { path: 'routes', loadChildren: () => import('./network/routes/routes.module').then(m => m.RoutesModule) },
-      { path: 'warehouses', loadChildren: () => import('./network/warehouses/warehouses.module').then(m => m.WarehousesModule) },
-      { path: 'payments', loadChildren: () => import('./finance/payments/payments.module').then(m => m.PaymentsModule) },
-      { path: 'reports', loadChildren: () => import('./finance/reports/reports.module').then(m => m.ReportsModule) },
-      { path: 'settings', loadComponent: () => import('./system/settings/settings').then(c => c.Settings) },
-      { path: 'support', loadComponent: () => import('./system/support/support').then(c => c.Support) },
+      { path: 'network', loadChildren: () => import('./network/network.module').then(m => m.NetworkModule) },
+      { path: 'people', loadChildren: () => import('./people/people.module').then(m => m.PeopleModule) },
+      { path: 'finance', loadChildren: () => import('./finance/finance.module').then(m => m.FinanceModule) },
+      { path: 'system', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },

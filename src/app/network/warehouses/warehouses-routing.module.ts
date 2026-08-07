@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WarehouseList } from './warehouse-list/warehouse-list';
-import { Inventory } from './inventory/inventory';
+import { WarehouseListComponent } from './warehouse-list/warehouse-list';
+import { InventoryComponent } from './inventory/inventory';
 
 const routes: Routes = [
-  { path: 'list', component: WarehouseList },
-  { path: 'inventory', component: Inventory },
+  { path: 'list', component: WarehouseListComponent },
+  { path: 'inventory', component: InventoryComponent },
   { path: '', redirectTo: 'list', pathMatch: 'full' }
 ];
 

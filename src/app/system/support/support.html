@@ -1,1 +1,99 @@
-<p>support works!</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-content">
+      <div class="icon-box" style="background-color: rgba(34, 197, 94, 0.1); color: #22c55e;">
+        <i class="fa-solid fa-headset"></i>
+      </div>
+      <div class="title-wrap">
+        <h1 class="page-title">Support Center</h1>
+        <p class="page-subtitle">Find answers, browse docs, or reach our team</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Options Grid -->
+  <div class="support-grid">
+    <div class="support-card" *ngFor="let option of supportOptions">
+      <div class="support-icon" [ngClass]="option.colorClass">
+        <i [class]="option.icon"></i>
+      </div>
+      <div class="support-info">
+        <div class="support-title">{{ option.title }}</div>
+        <div class="support-desc">{{ option.desc }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-layout mt-4">
+    <!-- Submit Ticket Column -->
+    <div class="left-column">
+      <div class="card parcel-card">
+        <div class="card-header">
+          <i class="fa-solid fa-ticket text-success"></i>
+          <h2 class="card-title">Submit a Ticket</h2>
+        </div>
+        <div class="card-body p-4">
+          <div class="form-group mb-3">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-control" placeholder="Brief summary of your issue">
+          </div>
+          
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select class="form-select">
+                  <option>Shipment Issue</option>
+                  <option>Billing</option>
+                  <option>Technical Support</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <div class="form-group">
+                <label class="form-label">Priority</label>
+                <select class="form-select">
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                  <option>Urgent</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="5" placeholder="Describe your issue in detail..."></textarea>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-primary submit-btn">
+              <i class="fa-solid fa-paper-plane me-2"></i> Submit Ticket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQs Column -->
+    <div class="right-column">
+      <div class="card parcel-card h-100">
+        <div class="card-header">
+          <i class="fa-regular fa-circle-question" style="color: #60a5fa;"></i>
+          <h2 class="card-title">Frequently Asked</h2>
+        </div>
+        <div class="card-body p-4">
+          <div class="faq-list">
+            <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+              <div class="faq-q">{{ faq.q }}</div>
+              <div class="faq-a">{{ faq.a }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
