@@ -1,0 +1,26 @@
+<div class="toast-container">
+  <div *ngFor="let toast of toasts$ | async" 
+       class="toast-card" 
+       [ngClass]="'toast-' + toast.type">
+       
+    <div class="toast-icon-wrapper">
+      <div class="icon-circle" [ngClass]="'icon-' + toast.type">
+        <i *ngIf="toast.type === 'success'" class="fa-solid fa-check"></i>
+        <i *ngIf="toast.type === 'error'" class="fa-solid fa-xmark"></i>
+        <i *ngIf="toast.type === 'info'" class="fa-solid fa-info"></i>
+        <i *ngIf="toast.type === 'warning'" class="fa-solid fa-info"></i>
+      </div>
+    </div>
+    
+    <div class="toast-content">
+      <p class="toast-message">{{ toast.message }}</p>
+    </div>
+    
+    <button class="toast-close" (click)="removeToast(toast.id)">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    
+    <!-- Progress Bar -->
+    <div class="toast-progress"></div>
+  </div>
+</div>

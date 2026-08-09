@@ -19,4 +19,9 @@ describe('Billing', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should expose billing history data for the grid', () => {
+    expect(component.billingHistory.length).toBeGreaterThan(0);
+    expect(component.billingHistoryColumns.length).toBe(5);
+  });
 });

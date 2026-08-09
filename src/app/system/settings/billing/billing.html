@@ -109,40 +109,12 @@
       </h5>
     </div>
     <div class="card-body p-4">
-      <div class="row table-header mx-0">
-        <div class="col-3">INVOICE</div>
-        <div class="col-3">DATE</div>
-        <div class="col-3 text-end">AMOUNT</div>
-        <div class="col-2 text-center">STATUS</div>
-        <div class="col-1 text-end">RECEIPT</div>
-      </div>
-      <div class="row table-row mx-0 align-items-center">
-        <div class="col-3 fw-medium">RCPT-0612</div>
-        <div class="col-3 settings-desc">Jun 21, 2026</div>
-        <div class="col-3 text-end fw-medium">$99.00</div>
-        <div class="col-2 text-center"><span class="badge-active">Paid</span></div>
-        <div class="col-1 text-end"><i class="fa-solid fa-download text-muted" style="cursor: pointer;"></i></div>
-      </div>
-      <div class="row table-row mx-0 align-items-center">
-        <div class="col-3 fw-medium">RCPT-0512</div>
-        <div class="col-3 settings-desc">May 21, 2026</div>
-        <div class="col-3 text-end fw-medium">$99.00</div>
-        <div class="col-2 text-center"><span class="badge-active">Paid</span></div>
-        <div class="col-1 text-end"><i class="fa-solid fa-download text-muted" style="cursor: pointer;"></i></div>
-      </div>
-      <div class="row table-row mx-0 align-items-center">
-        <div class="col-3 fw-medium">RCPT-0412</div>
-        <div class="col-3 settings-desc">Apr 21, 2026</div>
-        <div class="col-3 text-end fw-medium">$99.00</div>
-        <div class="col-2 text-center"><span class="badge-active">Paid</span></div>
-        <div class="col-1 text-end"><i class="fa-solid fa-download text-muted" style="cursor: pointer;"></i></div>
-      </div>
-      <div class="row table-row mx-0 align-items-center">
-        <div class="col-3 fw-medium">RCPT-0312</div>
-        <div class="col-3 settings-desc">Mar 21, 2026</div>
-        <div class="col-3 text-end fw-medium">$99.00</div>
-        <div class="col-2 text-center"><span class="badge-active">Paid</span></div>
-        <div class="col-1 text-end"><i class="fa-solid fa-download text-muted" style="cursor: pointer;"></i></div>
+      <div class="table-responsive">
+        <cats-data-grid [rowData]="billingHistory" [colDefs]="billingHistoryColumns" [totalRecords]="billingHistory.length"
+          [paginationRequired]="false" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="false"
+          [filterRequired]="false">
+       
+        </cats-data-grid>
       </div>
     </div>
   </div>

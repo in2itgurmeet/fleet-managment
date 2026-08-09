@@ -1,8 +1,11 @@
 <aside class="sidebar" [class.collapsed]="isCollapsed" [class.mobile-open]="isMobileOpen">
     <div class="sidebar-header">
         <div class="logo">
-            <i class="fa-solid fa-box-open logo-icon"></i>
-            <span class="logo-text" *ngIf="!isCollapsed">Parcelix</span>
+            <div class="logo-icon">
+                <img src="assets/images/logo.jpg" alt="">
+            </div>
+            <!-- <i class="fa-solid fa-box-open logo-icon"></i>
+            <span class="logo-text" *ngIf="!isCollapsed">Proxima</span> -->
         </div>
         <button class="close-mobile-btn" (click)="closeMobile.emit()" *ngIf="isMobileOpen">
             <i class="fa-solid fa-xmark"></i>

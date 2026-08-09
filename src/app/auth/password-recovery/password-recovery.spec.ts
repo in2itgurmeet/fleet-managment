@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VerifyOtp } from './verify-otp';
+import { PasswordRecovery } from './password-recovery';
 
-describe('VerifyOtp', () => {
-  let component: VerifyOtp;
-  let fixture: ComponentFixture<VerifyOtp>;
+describe('PasswordRecovery', () => {
+  let component: PasswordRecovery;
+  let fixture: ComponentFixture<PasswordRecovery>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VerifyOtp],
+      imports: [PasswordRecovery],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(VerifyOtp);
+    fixture = TestBed.createComponent(PasswordRecovery);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

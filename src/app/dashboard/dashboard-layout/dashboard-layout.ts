@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Sidebar } from '../../shared/sidebar/sidebar';
+import { AuthService } from '../../auth/auth.service';
+import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -22,6 +24,14 @@ export class DashboardLayout {
     { title: 'Failed Delivery', desc: 'PP-47990 — recipient not available', time: '15 min ago', type: 'warning', icon: 'fa-solid fa-triangle-exclamation' },
     { title: 'New Order', desc: 'Robert Johnson placed order #PP-48260', time: '1 hour ago', type: 'info', icon: 'fa-solid fa-user-plus' }
   ];
+
+  constructor(private authService: AuthService, private toast: ToastService) { }
+
+  logout() {
+    this.authService.logout();
+    this.toast.showSuccess('Logout successfully');
+
+  }
 
   toggleSidebar() {
     if (window.innerWidth <= 768) {

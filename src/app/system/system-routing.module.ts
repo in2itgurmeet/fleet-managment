@@ -17,6 +17,7 @@ const routes: Routes = [
     ]
   },
   { path: 'support', loadComponent: () => import('./support/support').then(c => c.SupportComponent) },
+  { path: 'profile', loadComponent: () => import('./profile/profile').then(c => c.ProfileComponent) },
   { path: '', redirectTo: 'settings', pathMatch: 'full' }
 ];
 

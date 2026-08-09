@@ -1,0 +1,170 @@
+/* Left side form styling */
+.login-left-panel {
+  min-height: 100vh;
+}
+
+.form-container {
+  width: 100%;
+}
+
+.brand-logo {
+  font-weight: 800;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.signin-btn {
+  background-color: #1a1c1e;
+  border-color: #1a1c1e;
+  transition: all 0.2s;
+  
+  &:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+  }
+}
+
+.social-login-container {
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #dee2e6;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+  }
+}
+
+/* Right side banner styling */
+.login-right-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.purple-gradient-bg {
+  background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
+  position: relative;
+  
+  /* Optional subtle pattern overlay */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 15% 50%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 85% 30%, rgba(255,255,255,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+}
+
+.giant-logo {
+  font-size: 8rem;
+  color: rgba(255,255,255,0.1);
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  transform: rotate(15deg);
+}
+
+.decorative-card {
+  border: 1px solid rgba(255,255,255,0.2);
+  margin-top: 30px;
+  
+  .card-glass-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .z-index-1 {
+    z-index: 1;
+  }
+}
+
+.avatar-group {
+  display: flex;
+  
+  .avatar-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    
+    &.ms-n3 {
+      margin-left: -12px;
+    }
+  }
+}
+
+/* Form element specific */
+.form-container-sm {
+  max-width: 400px;
+}
+
+.form-container-md {
+  max-width: 450px;
+}
+
+.banner-text-wrapper {
+  max-width: 500px;
+}
+
+.password-toggle-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  transition: right 0.2s, color 0.2s;
+  z-index: 5;
+  
+  &:hover {
+    color: #495057;
+  }
+}
+
+.is-invalid ~ .password-toggle-icon,
+.is-invalid + .password-toggle-icon {
+  right: 40px;
+}
+
+/* Responsive fixes and Mobile Unique Design */
+@media (max-width: 768px) {
+  .login-wrapper {
+    background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
+    padding: 20px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-left-panel {
+    min-height: auto;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    padding: 40px 24px !important;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .brand-logo {
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+  
+  h3.mb-4 {
+    text-align: center;
+  }
+}

@@ -26,8 +26,6 @@
             <i class="fa-solid fa-bell"></i>
             <span class="badge">3</span>
           </button>
-          
-          <!-- Notifications Dropdown -->
           <div class="notification-menu-card" *ngIf="isNotificationsOpen" (click)="$event.stopPropagation()">
             <div class="notif-header">
               <span class="notif-title">Notifications</span>
@@ -70,15 +68,15 @@
               </div>
             </div>
             <div class="menu-links">
-              <a routerLink="/settings/profile" class="menu-link" (click)="toggleProfileMenu()">
+              <a routerLink="/system/profile" class="menu-link" (click)="toggleProfileMenu()">
                 <i class="fa-regular fa-user"></i> My Profile
               </a>
-              <a routerLink="/settings" class="menu-link" (click)="toggleProfileMenu()">
+              <a routerLink="/system/settings" class="menu-link" (click)="toggleProfileMenu()">
                 <i class="fa-solid fa-gear"></i> Settings
               </a>
             </div>
             <div class="menu-footer">
-              <button class="logout-btn" (click)="toggleProfileMenu()">
+              <button class="logout-btn" (click)="logout()">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
               </button>
             </div>

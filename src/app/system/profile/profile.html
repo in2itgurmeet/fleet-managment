@@ -1,0 +1,365 @@
+<div class="page-container h-100 d-flex flex-column profile-page">
+  <!-- View Mode -->
+  <ng-container *ngIf="!isEditMode">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="header-left d-flex align-items-center gap-3">
+        <button class="btn rounded-circle icon-btn" (click)="goBack()">
+          <i class="fa-solid fa-arrow-left text-primary"></i>
+        </button>
+        <div class="title-wrap">
+          <h1 class="page-title mb-0 fs-5 fw-bold">Profile</h1>
+          <p class="page-subtitle mb-0 text-muted small">Your operations admin account and activity</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn btn-success rounded-pill px-4" (click)="toggleEditMode()">
+          <i class="fa-solid fa-pen me-2"></i> Edit Profile
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-content d-flex flex-grow-1 p-4 gap-4 ">
+      <div class="left-column left-col d-flex flex-column gap-4" >
+        <!-- User Info Card -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body text-center p-4">
+            <div class="avatar-wrap mb-3 mx-auto">
+              <img src="assets/images/avatar.jpg" alt="Profile" class="w-100 h-100 object-fit-cover"
+                onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">
+            </div>
+            <h4 class="fw-bold mb-1">Jenus Ana</h4>
+            <span class="badge bg-success-subtle text-success rounded-pill px-3 py-2 mb-4">Operations Admin</span>
+
+            <div class="contact-info text-start d-flex flex-column gap-3 mb-4">
+              <div class="d-flex align-items-center gap-3 text-muted">
+                <div
+                  class="icon-box size-32 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                  <i class="fa-regular fa-envelope"></i>
+                </div>
+                <span>admin@Parcelix.com</span>
+              </div>
+              <div class="d-flex align-items-center gap-3 text-muted">
+                <div
+                  class="icon-box size-32 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <span>+1 555 217 8842</span>
+              </div>
+              <div class="d-flex align-items-center gap-3 text-muted">
+                <div
+                  class="icon-box size-32 bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center"
+                  >
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <span>New York, NY - USA</span>
+              </div>
+            </div>
+
+            <button class="btn btn-success w-100 rounded-pill fw-medium py-2" (click)="toggleEditMode()">
+              <i class="fa-solid fa-pen me-2"></i> Edit Profile
+            </button>
+          </div>
+        </div>
+
+        <!-- Contact Card -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h6 class="text-uppercase text-muted fw-bold small mb-3">CONTACT</h6>
+            <div class="d-flex gap-2">
+              <button class="btn btn-outline-secondary flex-grow-1 rounded-pill"><i class="fa-solid fa-phone me-2"></i>
+                Call</button>
+              <button class="btn btn-outline-secondary flex-grow-1 rounded-pill"><i
+                  class="fa-regular fa-message me-2"></i> Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="right-column right-col flex-grow-1 d-flex flex-column gap-4">
+        <!-- Stats Row -->
+        <div class="row g-4">
+          <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <div class="card-body p-4">
+                <div
+                  class="icon-box size-40 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center mb-3"
+                  >
+                  <i class="fa-solid fa-box"></i>
+                </div>
+                <h3 class="fw-bold mb-1">18.4K</h3>
+                <p class="text-muted small mb-0">Shipments Managed</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <div class="card-body p-4">
+                <div
+                  class="icon-box size-40 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center mb-3"
+                  >
+                  <i class="fa-solid fa-motorcycle"></i>
+                </div>
+                <h3 class="fw-bold mb-1">48</h3>
+                <p class="text-muted small mb-0">Active Riders</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <div class="card-body p-4">
+                <div
+                  class="icon-box size-40 bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center mb-3"
+                  >
+                  <i class="fa-solid fa-building"></i>
+                </div>
+                <h3 class="fw-bold mb-1">6</h3>
+                <p class="text-muted small mb-0">Hubs</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+              <div class="card-body p-4">
+                <div
+                  class="icon-box size-40 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center mb-3"
+                  >
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="fw-bold mb-1">94%</h3>
+                <p class="text-muted small mb-0">Success Rate</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Card -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+              <div class="icon-box size-32 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-at"></i>
+              </div>
+              About
+            </h6>
+            <p class="text-muted mb-0 lh-lg about-text" >
+              Jenus oversees daily courier operations across 6 regional hubs - coordinating rider fleets, monitoring
+              delivery SLAs, and keeping COD reconciliation on track. Focused on lifting on-time delivery rates and
+              reducing failed deliveries through smarter route and hub assignment.
+            </p>
+          </div>
+        </div>
+
+        <!-- Recent Activity Card -->
+        <div class="card border-0 shadow-sm rounded-4 flex-grow-1">
+          <div class="card-body p-4">
+            <h6 class="fw-bold mb-4 d-flex align-items-center gap-2">
+              <div class="icon-box size-32 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              Recent Activity
+            </h6>
+
+            <div class="activity-timeline d-flex flex-column gap-4 position-relative">
+              <div class="activity-item d-flex gap-3">
+                <div
+                  class="icon-box size-32 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                  >
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                  <p class="mb-0 fw-medium">PP-48213 delivered to Kathryn Murphy</p>
+                  <small class="text-muted">2 minutes ago</small>
+                </div>
+              </div>
+              <div class="activity-item d-flex gap-3">
+                <div
+                  class="icon-box size-32 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                  >
+                  <i class="fa-solid fa-truck"></i>
+                </div>
+                <div>
+                  <p class="mb-0 fw-medium">Assigned Marcus Bell to Zone A route</p>
+                  <small class="text-muted">25 minutes ago</small>
+                </div>
+              </div>
+              <div class="activity-item d-flex gap-3">
+                <div
+                  class="icon-box size-32 bg-warning-subtle text-warning rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                  >
+                  <i class="fa-solid fa-rotate-left"></i>
+                </div>
+                <div>
+                  <p class="mb-0 fw-medium">PP-47990 marked as return - recipient unavailable</p>
+                  <small class="text-muted">1 hour ago</small>
+                </div>
+              </div>
+              <div class="activity-item d-flex gap-3">
+                <div
+                  class="icon-box size-32 bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                  >
+                  <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+                <div>
+                  <p class="mb-0 fw-medium">Order #PP-48260 approved for dispatch</p>
+                  <small class="text-muted">3 hours ago</small>
+                </div>
+              </div>
+              <div class="activity-item d-flex gap-3">
+                <div
+                  class="icon-box size-32 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                  >
+                  <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <div>
+                  <p class="mb-0 fw-medium">$1,240 COD reconciled for Central Hub</p>
+                  <small class="text-muted">5 hours ago</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Edit Mode -->
+  <ng-container *ngIf="isEditMode">
+    <div class=" d-flex justify-content-between align-items-center">
+      <div class="header-left d-flex align-items-center gap-3">
+        <button class="btn rounded-circle icon-btn" (click)="toggleEditMode()">
+          <i class="fa-solid fa-arrow-left text-primary"></i>
+        </button>
+        <div class="title-wrap">
+          <h1 class="page-title mb-0 fs-5 fw-bold">Edit Profile</h1>
+          <p class="page-subtitle mb-0 text-muted small">Update your account details and preferences</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-content d-flex flex-grow-1 p-4 gap-4 ">
+      <!-- Left Column (Forms) -->
+      <div class="left-column left-col flex-grow-1 d-flex flex-column gap-4">
+        <!-- Personal Information -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h6 class="fw-bold mb-4 d-flex align-items-center gap-2">
+              <i class="fa-regular fa-user text-success"></i> Personal Information
+            </h6>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label class="form-label text-muted small">Full Name</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3" placeholder="Enter full name" value="Jenus Ana">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">Email</label>
+                <input type="email" class="form-control rounded-pill py-2 px-3"
+                  placeholder="Enter email" value="admin@Parcelix.com">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">Phone</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3"
+                  placeholder="Enter phone number" value="+1 555 217 8842">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">Role</label>
+                <select class="form-select rounded-pill py-2 px-3">
+                  <option selected>Operations Admin</option>
+                  <option>System Admin</option>
+                  <option>Manager</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h6 class="fw-bold mb-4 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-location-dot text-primary"></i> Address
+            </h6>
+            <div class="row g-4">
+              <div class="col-12">
+                <label class="form-label text-muted small">Street</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3" placeholder="Enter street" value="88 Park Avenue">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">City</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3" placeholder="Enter city" value="New York">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">State</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3" placeholder="Enter state" value="NY">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">ZIP</label>
+                <input type="text" class="form-control rounded-pill py-2 px-3" placeholder="Enter ZIP code" value="10001">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Change Password -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body p-4">
+            <h6 class="fw-bold mb-4 d-flex align-items-center gap-2">
+              <i class="fa-solid fa-lock text-warning"></i> Change Password
+            </h6>
+            <div class="row g-4">
+              <div class="col-12">
+                <label class="form-label text-muted small">Current Password</label>
+                <input type="password" class="form-control rounded-pill py-2 px-3"
+                  placeholder="Enter current password">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">New Password</label>
+                <input type="password" class="form-control rounded-pill py-2 px-3"
+                  placeholder="Enter new password">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label text-muted small">Confirm Password</label>
+                <input type="password" class="form-control rounded-pill py-2 px-3"
+                  placeholder="Confirm new password">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column (Profile Photo & Actions) -->
+      <div class="right-column right-col d-flex flex-column gap-4" >
+        <!-- Profile Photo -->
+        <div class="card border-0 shadow-sm rounded-4">
+          <div class="card-body text-center p-4">
+            <h6 class="text-uppercase text-muted fw-bold small mb-4 text-start">PROFILE PHOTO</h6>
+            <div class="avatar-wrap mb-3 mx-auto">
+              <img src="assets/images/avatar.jpg" alt="Profile" class="w-100 h-100 object-fit-cover"
+                onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">
+            </div>
+            <h5 class="fw-bold mb-1">Jenus Ana</h5>
+            <p class="text-muted small mb-4">Operations Admin</p>
+
+            <button class="btn btn-outline-secondary rounded-pill py-2 px-4 w-100">
+              <i class="fa-solid fa-arrow-up-from-bracket me-2"></i> Upload new photo
+            </button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card border-0 shadow-sm rounded-4 bg-transparent border-0 shadow-none">
+          <div class="d-flex flex-column gap-2">
+            <button class="btn btn-success rounded-pill fw-medium py-2" (click)="toggleEditMode()">
+              <i class="fa-regular fa-circle-check me-2"></i> Save Changes
+            </button>
+            <button class="btn btn-outline-secondary rounded-pill py-2" (click)="toggleEditMode()">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

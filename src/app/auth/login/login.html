@@ -1,1 +1,123 @@
-<p>login works!</p>
+<div class="login-wrapper container-fluid p-0 min-vh-100 d-flex align-items-center">
+  <div class="row g-0 w-100 m-0 flex-grow-1">
+    <div
+      class="col-md-6 col-lg-5 d-flex flex-column justify-content-center bg-white px-5 py-5 login-left-panel mx-auto mx-md-0">
+
+      <div class="form-container form-container-md mx-auto">
+        <!-- Logo Header -->
+        <div class="brand-header mb-5">
+          <h2 class="brand-logo">
+            <i class="fa-solid fa-truck text-primary me-2"></i> Vichle Management
+          </h2>
+        </div>
+
+        <h3 class="mb-4 fw-bold text-dark">Sign in</h3>
+
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label text-muted small fw-bold">Email Address</label>
+            <input type="email" formControlName="email" class="form-control rounded-pill py-2 px-3"
+              placeholder="user@example.com"
+              [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+              class="text-danger small mt-1 ms-2">
+              <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email address.</span>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-4">
+            <label class="form-label text-muted small fw-bold">Password</label>
+            <div class="position-relative">
+              <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                class="form-control rounded-pill py-2 px-3" placeholder="••••••••"
+                [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+              @if (loginForm.get('password')?.value?.length > 0) {
+              <i class="fa-solid password-toggle-icon" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+                (click)="togglePasswordVisibility()"></i>
+              }
+            </div>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              class="text-danger small mt-1 ms-2">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6
+                characters.</span>
+            </div>
+          </div>
+
+          <!-- Remember Me -->
+          <div class="mb-4 form-check ps-1 d-flex align-items-center gap-2">
+            <input type="checkbox" formControlName="rememberMe" class="form-check-input mt-0 ms-2" id="rememberMe">
+            <label class="form-check-label text-dark small fw-medium" for="rememberMe">Remember me</label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" [disabled]="loginForm.invalid" class="btn btn-dark w-100 py-2 mb-4 rounded-pill fw-bold signin-btn">Sign in</button>
+        </form>
+
+        <!-- Links -->
+        <div class="text-start mb-4">
+          <p class="small text-muted mb-1">
+            Don't have an account? <a routerLink="/auth/register" class="text-dark fw-bold text-decoration-none">Sign
+              up</a>
+          </p>
+          <a routerLink="/auth/password-recovery" class="small text-muted text-decoration-none">Forgot Password?</a>
+        </div>
+
+        <!-- Social Logins -->
+        <div class="social-login-container d-flex gap-3">
+          <button class="social-btn"><i class="fa-brands fa-google text-danger"></i></button>
+          <button class="social-btn"><i class="fa-brands fa-github text-dark"></i></button>
+          <button class="social-btn"><i class="fa-brands fa-facebook text-primary"></i></button>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6 col-lg-7 d-none d-md-flex login-right-panel position-relative">
+      <div class="purple-gradient-bg w-100 h-100 d-flex flex-column justify-content-center align-items-center p-5">
+
+        <!-- Big abstract icon / logo representation -->
+        <div class="giant-logo mb-5">
+          <i class="fa-solid fa-cube"></i>
+        </div>
+
+        <div class="banner-content text-white w-100 banner-text-wrapper">
+          <h4 class="mb-3 fw-bold">Vichle Management</h4>
+          <h1 class="display-5 fw-bold mb-4">Welcome to <br> Vichle Management</h1>
+          <p class="opacity-75 mb-5 fs-5">
+            Empower your logistics with our advanced tools and seamless integrations. Join us and start building your
+            fleet today.
+          </p>
+
+          <!-- Decorative Card -->
+          <div class="decorative-card p-4 rounded-4 position-relative overflow-hidden">
+            <div class="card-glass-bg"></div>
+            <div class="position-relative z-index-1">
+              <h3 class="fw-bold mb-3">Optimize your routes and fleet easily apply now</h3>
+              <p class="small opacity-75 mb-0">Be among the first founders to experience the easiest way to start
+                running a logistics business.</p>
+
+              <div class="avatar-group mt-4">
+                <img src="https://i.pravatar.cc/150?img=11" alt="avatar"
+                  class="rounded-circle border border-2 border-white avatar-img">
+                <img src="https://i.pravatar.cc/150?img=32" alt="avatar"
+                  class="rounded-circle border border-2 border-white avatar-img ms-n3">
+                <img src="https://i.pravatar.cc/150?img=68" alt="avatar"
+                  class="rounded-circle border border-2 border-white avatar-img ms-n3">
+                <div
+                  class="rounded-circle border border-2 border-white avatar-img ms-n3 bg-dark text-white d-flex align-items-center justify-content-center fw-bold small">
+                  +</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
