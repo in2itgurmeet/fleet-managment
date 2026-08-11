@@ -69,7 +69,8 @@
         </div>
         <div class="card-body">
           <div class="timeline">
-            <div class="timeline-event" *ngFor="let event of trackingEvents; let i = index" [class.active]="event.isActive">
+            @for (event of trackingEvents; track event.status) {
+            <div class="timeline-event" [class.active]="event.isActive">
               <div class="timeline-indicator" [style.border-color]="event.color"></div>
               <div class="timeline-content">
                 <div class="timeline-title" [style.color]="event.isActive ? 'var(--primary-color)' : 'var(--text-color)'">
@@ -79,6 +80,7 @@
                 <div class="timeline-time">{{ event.date }} · {{ event.time }}</div>
               </div>
             </div>
+            }
           </div>
         </div>
       </div>

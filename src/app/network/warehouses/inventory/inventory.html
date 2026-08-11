@@ -21,7 +21,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -40,20 +41,25 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Table Section -->
   <div class="table-card">
     <div class="table-toolbar">
       <div class="tabs">
-        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+        @for (tab of tabs; track tab) {
+        <button class="tab-btn" [class.active]="activeTab === tab" (click)="setTab(tab)">
           {{ tab }}
         </button>
+        }
       </div>
       <div class="toolbar-actions">
         <div class="search-box">
@@ -70,35 +76,14 @@
       <cats-data-grid [rowData]="inventoryItems" [colDefs]="colDefs" [totalRecords]="inventoryItems.length"
         [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
         [filterRequired]="false">
-        
-        <ng-template #customTemplate let-row let-col="colDef">
-          <ng-container *ngIf="col.fieldName === 'item'">
-            <span class="font-weight-bold">{{ row.item }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'status'">
-            <span class="status-badge" [ngClass]="{
-              'badge-success': row.status === 'In Stock',
-              'badge-warning': row.status === 'Low Stock',
-              'badge-danger': row.status === 'Out of Stock',
-              'badge-info': row.status === 'Reordered'
-            }">{{ row.status }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'action'">
-            <button class="btn-icon">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-          </ng-container>
-        </ng-template>
-
       </cats-data-grid>
     </div>
   </div>
 </div>
 
 <!-- Add Item Modal -->
-<div class="modal-overlay" *ngIf="isAddItemModalOpen" (click)="closeAddModal()">
+@if (isAddItemModalOpen) {
+<div class="modal-overlay" (click)="closeAddModal()">
   <div class="custom-modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <div class="modal-title-wrapper">
@@ -154,3 +139,4 @@
     </div>
   </div>
 </div>
+}

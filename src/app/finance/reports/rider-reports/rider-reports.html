@@ -15,9 +15,11 @@
           <i class="fa-regular fa-calendar me-2"></i> {{ selectedDateFilter }}
         </button>
         <ul class="dropdown-menu">
-          <li *ngFor="let filter of dateFilters">
+          @for (filter of dateFilters; track filter) {
+          <li>
             <a class="dropdown-item" href="javascript:void(0)" (click)="setDateFilter(filter)">{{ filter }}</a>
           </li>
+          }
         </ul>
       </div>
       <button class="btn btn-secondary">
@@ -28,7 +30,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -47,11 +50,14 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Charts Section -->
@@ -104,25 +110,6 @@
       <cats-data-grid [rowData]="riderData" [colDefs]="colDefs" [totalRecords]="riderData.length"
         [paginationRequired]="false" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="false"
         [filterRequired]="false">
-        
-        <ng-template #customTemplate let-row let-col="colDef">
-          
-          <ng-container *ngIf="col.fieldName === 'rider'">
-            <div class="d-flex align-items-center">
-              <div class="avatar bg-light text-dark rounded-circle me-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px; font-size: 12px; font-weight: bold;">
-                {{ row.rider.split(' ')[0][0] }}{{ row.rider.split(' ')[1][0] }}
-              </div>
-              <span class="font-weight-bold">{{ row.rider }}</span>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'rating'">
-            <span class="font-weight-bold">{{ row.rating }}</span>
-            <i class="fa-solid fa-star text-muted ms-1" style="font-size: 12px;"></i>
-          </ng-container>
-
-        </ng-template>
-
       </cats-data-grid>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <div class="page-container h-100 d-flex flex-column profile-page">
   <!-- View Mode -->
-  <ng-container *ngIf="!isEditMode">
+  @if (!isEditMode) {
     <div class="d-flex justify-content-between align-items-center">
       <div class="header-left d-flex align-items-center gap-3">
         <button class="btn rounded-circle icon-btn" (click)="goBack()">
@@ -223,10 +223,10 @@
         </div>
       </div>
     </div>
-  </ng-container>
+  }
 
   <!-- Edit Mode -->
-  <ng-container *ngIf="isEditMode">
+  @if (isEditMode) {
     <div class=" d-flex justify-content-between align-items-center">
       <div class="header-left d-flex align-items-center gap-3">
         <button class="btn rounded-circle icon-btn" (click)="toggleEditMode()">

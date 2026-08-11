@@ -21,7 +21,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -40,11 +41,14 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Top Riders Table -->
@@ -57,34 +61,6 @@
       <cats-data-grid [rowData]="topRiders" [colDefs]="colDefs" [totalRecords]="topRiders.length"
         [paginationRequired]="false" [sortingRequired]="false" [selectedRowEmpty]="true" [draggable]="false"
         [filterRequired]="false">
-        
-        <ng-template #customTemplate let-row let-col="colDef">
-          <!-- Rank Column -->
-          <ng-container *ngIf="col.fieldName === 'rank'">
-            <span class="font-weight-bold">{{ row.rank }}</span>
-          </ng-container>
-
-          <!-- Rider Column -->
-          <ng-container *ngIf="col.fieldName === 'name'">
-            <div class="user-cell">
-              <img [src]="row.avatar" alt="Avatar" class="user-avatar" onerror="this.src='https://ui-avatars.com/api/?name=' + row.name + '&background=random'">
-              <span class="user-name">{{ row.name }}</span>
-            </div>
-          </ng-container>
-
-          <!-- Rating Column -->
-          <ng-container *ngIf="col.fieldName === 'rating'">
-            <div class="rating-cell">
-              <i class="fa-solid fa-star text-warning"></i> {{ row.rating }}
-            </div>
-          </ng-container>
-
-          <!-- Earnings Column -->
-          <ng-container *ngIf="col.fieldName === 'earnings'">
-            <span class="font-weight-bold">{{ row.earnings }}</span>
-          </ng-container>
-        </ng-template>
-
       </cats-data-grid>
     </div>
   </div>
@@ -97,7 +73,8 @@
     </div>
     <div class="card-body">
       <div class="quality-grid">
-        <div class="quality-item" *ngFor="let item of serviceQuality">
+        @for (item of serviceQuality; track item.label) {
+        <div class="quality-item">
           <div class="quality-header">
             <span class="quality-label">{{ item.label }}</span>
             <span class="quality-value font-weight-bold">{{ item.value }}</span>
@@ -106,6 +83,7 @@
             <div class="quality-bar-fill" [style.width]="item.value"></div>
           </div>
         </div>
+        }
       </div>
     </div>
   </div>

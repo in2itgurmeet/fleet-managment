@@ -21,7 +21,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -40,20 +41,25 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Table Section -->
   <div class="table-card">
     <div class="table-toolbar">
       <div class="tabs">
-        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+        @for (tab of tabs; track tab) {
+        <button class="tab-btn" [class.active]="activeTab === tab" (click)="setTab(tab)">
           {{ tab }}
         </button>
+        }
       </div>
       <div class="toolbar-actions">
         <div class="search-box">
@@ -70,19 +76,6 @@
       <cats-data-grid [rowData]="customers" [colDefs]="colDefs" [totalRecords]="customers.length"
         [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
         [filterRequired]="false">
-        
-        <!-- Custom Template for CUSTOMER column -->
-        <ng-template #customTemplate let-row let-col="colDef">
-          <ng-container *ngIf="col.fieldName === 'name'">
-            <div class="customer-cell">
-              <img [src]="row.avatar" alt="Avatar" class="customer-avatar" onerror="this.src='https://ui-avatars.com/api/?name=' + row.name + '&background=random'">
-              <div class="customer-info">
-                <div class="customer-name">{{ row.name }}</div>
-                <div class="customer-email">{{ row.email }}</div>
-              </div>
-            </div>
-          </ng-container>
-        </ng-template>
 
       </cats-data-grid>
     </div>

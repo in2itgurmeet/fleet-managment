@@ -21,7 +21,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -40,20 +41,25 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Table Section -->
   <div class="table-card">
     <div class="table-toolbar">
       <div class="tabs">
-        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+        @for (tab of tabs; track tab) {
+        <button class="tab-btn" [class.active]="activeTab === tab" (click)="setTab(tab)">
           {{ tab }}
         </button>
+        }
       </div>
       <div class="toolbar-actions">
         <div class="search-box">
@@ -70,43 +76,6 @@
       <cats-data-grid [rowData]="warehouses" [colDefs]="colDefs" [totalRecords]="warehouses.length"
         [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
         [filterRequired]="false">
-        
-        <ng-template #customTemplate let-row let-col="colDef">
-          
-          <ng-container *ngIf="col.fieldName === 'name'">
-            <div class="user-cell">
-              <div class="user-info">
-                <div class="user-name">{{ row.name }}</div>
-                <div class="user-sub">{{ row.location }}</div>
-              </div>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'utilization'">
-            <div class="utilization-cell">
-              <div class="util-bar-bg">
-                <div class="util-bar-fill" [style.width.%]="row.utilization"
-                  [ngClass]="row.utilization > 90 ? 'bg-danger' : (row.utilization > 75 ? 'bg-warning' : 'bg-success')">
-                </div>
-              </div>
-              <span class="util-text">{{ row.utilization }}%</span>
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'status'">
-            <span class="status-badge" [ngClass]="{
-              'badge-success': row.status === 'Operational',
-              'badge-warning': row.status === 'Near Full',
-              'badge-info': row.status === 'Maintenance'
-            }">{{ row.status }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'action'">
-            <button class="btn-icon">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-          </ng-container>
-        </ng-template>
 
       </cats-data-grid>
     </div>
@@ -114,7 +83,8 @@
 </div>
 
 <!-- Add Warehouse Modal -->
-<div class="modal-overlay" *ngIf="isAddWarehouseModalOpen" (click)="closeAddModal()">
+@if (isAddWarehouseModalOpen) {
+<div class="modal-overlay" (click)="closeAddModal()">
   <div class="custom-modal" (click)="$event.stopPropagation()">
     <div class="modal-header">
       <div class="modal-title-wrapper">
@@ -169,3 +139,4 @@
     </div>
   </div>
 </div>
+}

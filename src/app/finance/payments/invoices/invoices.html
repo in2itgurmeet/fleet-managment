@@ -21,7 +21,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -40,20 +41,25 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Table Section -->
   <div class="table-card">
     <div class="table-toolbar">
       <div class="tabs">
-        <button class="tab-btn" *ngFor="let tab of tabs" [class.active]="activeTab === tab" (click)="setTab(tab)">
+        @for (tab of tabs; track tab) {
+        <button class="tab-btn" [class.active]="activeTab === tab" (click)="setTab(tab)">
           {{ tab }}
         </button>
+        }
       </div>
       <div class="toolbar-actions">
         <div class="search-box">
@@ -70,91 +76,72 @@
       <cats-data-grid [rowData]="invoicesData" [colDefs]="colDefs" [totalRecords]="invoicesData.length"
         [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
         [filterRequired]="false">
-        
-        <ng-template #customTemplate let-row let-col="colDef">
-          
-          <ng-container *ngIf="col.fieldName === 'id'">
-            <span class="font-weight-bold">{{ row.id }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'amount'">
-            <span class="font-weight-bold">{{ row.amount }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'status'">
-            <span class="status-badge" [ngClass]="{
-              'badge-success': row.status === 'Paid',
-              'badge-warning': row.status === 'Unpaid',
-              'badge-danger': row.status === 'Overdue',
-              'badge-secondary': row.status === 'Draft'
-            }">{{ row.status }}</span>
-          </ng-container>
-
-        </ng-template>
       </cats-data-grid>
     </div>
   </div>
 </div>
 
 <!-- New Invoice Modal -->
-<div class="modal-overlay" *ngIf="isNewInvoiceModalOpen" (click)="closeNewInvoiceModal()">
-  <div class="custom-modal" (click)="$event.stopPropagation()">
-    <div class="modal-header">
-      <div class="modal-title-wrapper">
-        <div class="modal-icon-box">
-          <i class="fa-solid fa-file-invoice"></i>
-        </div>
-        <h3 class="modal-title">New Invoice</h3>
-      </div>
-      <button class="close-btn green-outline" (click)="closeNewInvoiceModal()">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    </div>
-    
-    <div class="modal-body">
-      <div class="form-group mb-3">
-        <label>Client</label>
-        <input type="text" class="form-control" placeholder="Acme Logistics Co.">
-      </div>
-      
-      <div class="form-row">
-        <div class="form-group half">
-          <label>Issue Date</label>
-          <input type="date" class="form-control" placeholder="mm/dd/yyyy">
-        </div>
-        <div class="form-group half">
-          <label>Due Date</label>
-          <input type="date" class="form-control" placeholder="mm/dd/yyyy">
-        </div>
-      </div>
-      
-      <div class="form-row">
-        <div class="form-group half">
-          <label>Amount</label>
-          <input type="number" class="form-control" placeholder="0.00">
-        </div>
-        <div class="form-group half">
-          <label>Status</label>
-          <select class="form-select">
-            <option>Draft</option>
-            <option>Paid</option>
-            <option>Unpaid</option>
-            <option>Overdue</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group mb-4">
-        <label>Notes</label>
-        <textarea class="form-control" rows="3" placeholder="Optional notes..."></textarea>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-cancel" (click)="closeNewInvoiceModal()">Cancel</button>
-        <button class="btn-submit">
-          <i class="fa-regular fa-circle-check"></i> Create Invoice
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+ @if(isNewInvoiceModalOpen) {
+   <div class="modal-overlay" (click)="closeNewInvoiceModal()">
+     <div class="custom-modal" (click)="$event.stopPropagation()">
+       <div class="modal-header">
+         <div class="modal-title-wrapper">
+           <div class="modal-icon-box">
+             <i class="fa-solid fa-file-invoice"></i>
+           </div>
+           <h3 class="modal-title">New Invoice</h3>
+         </div>
+         <button class="close-btn green-outline" (click)="closeNewInvoiceModal()">
+           <i class="fa-solid fa-xmark"></i>
+         </button>
+       </div>
+       
+       <div class="modal-body">
+         <div class="form-group mb-3">
+           <label>Client</label>
+           <input type="text" class="form-control" placeholder="Acme Logistics Co.">
+         </div>
+         
+         <div class="form-row">
+           <div class="form-group half">
+             <label>Issue Date</label>
+             <input type="date" class="form-control" placeholder="mm/dd/yyyy">
+           </div>
+           <div class="form-group half">
+             <label>Due Date</label>
+             <input type="date" class="form-control" placeholder="mm/dd/yyyy">
+           </div>
+         </div>
+         
+         <div class="form-row">
+           <div class="form-group half">
+             <label>Amount</label>
+             <input type="number" class="form-control" placeholder="0.00">
+           </div>
+           <div class="form-group half">
+             <label>Status</label>
+             <select class="form-select">
+               <option>Draft</option>
+               <option>Paid</option>
+               <option>Unpaid</option>
+               <option>Overdue</option>
+             </select>
+           </div>
+         </div>
+   
+         <div class="form-group mb-4">
+           <label>Notes</label>
+           <textarea class="form-control" rows="3" placeholder="Optional notes..."></textarea>
+         </div>
+   
+         <div class="modal-footer">
+           <button class="btn-cancel" (click)="closeNewInvoiceModal()">Cancel</button>
+           <button class="btn-submit">
+             <i class="fa-regular fa-circle-check"></i> Create Invoice
+           </button>
+         </div>
+       </div>
+     </div>
+   </div>
+ }

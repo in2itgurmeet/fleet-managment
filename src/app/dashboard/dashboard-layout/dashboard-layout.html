@@ -1,5 +1,7 @@
 <div class="dashboard-wrapper" [class.sidebar-collapsed]="isSidebarCollapsed" [class.dark-theme]="isDarkTheme">
-  <div class="mobile-overlay" *ngIf="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
+  @if (isMobileMenuOpen) {
+  <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
+  }
   <app-sidebar [isCollapsed]="isSidebarCollapsed" [isMobileOpen]="isMobileMenuOpen"
     (closeMobile)="closeMobileMenu()"></app-sidebar>
   <div class="main-content">
@@ -26,13 +28,15 @@
             <i class="fa-solid fa-bell"></i>
             <span class="badge">3</span>
           </button>
-          <div class="notification-menu-card" *ngIf="isNotificationsOpen" (click)="$event.stopPropagation()">
+          @if (isNotificationsOpen) {
+          <div class="notification-menu-card" (click)="$event.stopPropagation()">
             <div class="notif-header">
               <span class="notif-title">Notifications</span>
               <button class="mark-read-btn">Mark all read</button>
             </div>
             <div class="notif-list">
-              <div class="notif-item" *ngFor="let notif of notifications">
+              @for (notif of notifications; track notif.title) {
+              <div class="notif-item">
                 <div class="notif-icon-box" [ngClass]="notif.type">
                   <i [class]="notif.icon"></i>
                 </div>
@@ -42,11 +46,13 @@
                   <div class="notif-item-time">{{ notif.time }}</div>
                 </div>
               </div>
+              }
             </div>
             <div class="notif-footer">
               <button class="view-all-btn">View all notifications</button>
             </div>
           </div>
+          }
         </div>
         <div class="profile-dropdown" (click)="toggleProfileMenu()">
           <img src="assets/images/avatar.jpg" alt="Profile" class="avatar"
@@ -58,7 +64,8 @@
           <i class="fa-solid fa-chevron-down text-muted" style="font-size: 0.8rem; margin-left: 5px;"></i>
 
           <!-- Profile Dropdown Menu Card -->
-          <div class="profile-menu-card" *ngIf="isProfileMenuOpen" (click)="$event.stopPropagation()">
+          @if (isProfileMenuOpen) {
+          <div class="profile-menu-card" (click)="$event.stopPropagation()">
             <div class="menu-header">
               <img src="assets/images/avatar.jpg" alt="Profile" class="menu-avatar"
                 onerror="this.src='https://ui-avatars.com/api/?name=Jenus+Ana&background=random'">
@@ -81,6 +88,7 @@
               </button>
             </div>
           </div>
+          }
         </div>
       </div>
     </header>

@@ -1,14 +1,22 @@
 <div class="toast-container">
-  <div *ngFor="let toast of toasts$ | async" 
-       class="toast-card" 
+  @for (toast of toasts$ | async; track toast.id) {
+  <div class="toast-card" 
        [ngClass]="'toast-' + toast.type">
        
     <div class="toast-icon-wrapper">
       <div class="icon-circle" [ngClass]="'icon-' + toast.type">
-        <i *ngIf="toast.type === 'success'" class="fa-solid fa-check"></i>
-        <i *ngIf="toast.type === 'error'" class="fa-solid fa-xmark"></i>
-        <i *ngIf="toast.type === 'info'" class="fa-solid fa-info"></i>
-        <i *ngIf="toast.type === 'warning'" class="fa-solid fa-info"></i>
+        @if (toast.type === 'success') {
+          <i class="fa-solid fa-check"></i>
+        }
+        @if (toast.type === 'error') {
+          <i class="fa-solid fa-xmark"></i>
+        }
+        @if (toast.type === 'info') {
+          <i class="fa-solid fa-info"></i>
+        }
+        @if (toast.type === 'warning') {
+          <i class="fa-solid fa-info"></i>
+        }
       </div>
     </div>
     
@@ -23,4 +31,5 @@
     <!-- Progress Bar -->
     <div class="toast-progress"></div>
   </div>
+  }
 </div>

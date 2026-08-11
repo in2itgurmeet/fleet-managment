@@ -8,7 +8,9 @@
       <div class="title-wrap">
         <div class="title-row">
           <h1 class="page-title">{{ customer.name }}</h1>
-          <span class="badge-info ms-2" *ngIf="customer.status === 'VIP'">VIP</span>
+          @if(customer.status === 'VIP') {
+          <span class="badge-info ms-2">VIP</span>
+          }
         </div>
         <p class="page-subtitle">Customer since {{ customer.since }} - {{ customer.status }}</p>
       </div>
@@ -52,7 +54,8 @@
 
       <!-- Metrics Grid -->
       <div class="metrics-grid">
-        <div class="metric-card card" *ngFor="let stat of stats">
+        @for (stat of stats; track stat.title) {
+        <div class="metric-card card">
           <div class="metric-header">
             <span>{{ stat.title }}</span>
           </div>
@@ -65,10 +68,13 @@
               </span>
             </div>
             <div class="metric-chart" [class]="stat.colorClass">
-              <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+              @for (h of stat.chartData; track h) {
+              <div class="chart-bar" [style.height.%]="h * 10"></div>
+              }
             </div>
           </div>
         </div>
+        }
       </div>
 
       <!-- Recent Orders Card -->

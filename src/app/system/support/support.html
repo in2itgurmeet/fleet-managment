@@ -13,7 +13,8 @@
 
   <!-- Contact Options Grid -->
   <div class="support-grid">
-    <div class="support-card" *ngFor="let option of supportOptions">
+    @for (option of supportOptions; track option.title) {
+    <div class="support-card">
       <div class="support-icon" [ngClass]="option.colorClass">
         <i [class]="option.icon"></i>
       </div>
@@ -22,6 +23,7 @@
         <div class="support-desc">{{ option.desc }}</div>
       </div>
     </div>
+    }
   </div>
 
   <div class="main-layout mt-4">
@@ -86,10 +88,12 @@
         </div>
         <div class="card-body p-4">
           <div class="faq-list">
-            <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+            @for (faq of faqs; track faq.q) {
+            <div class="faq-item">
               <div class="faq-q">{{ faq.q }}</div>
               <div class="faq-a">{{ faq.a }}</div>
             </div>
+            }
           </div>
         </div>
       </div>

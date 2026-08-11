@@ -15,9 +15,11 @@
           <i class="fa-regular fa-calendar me-2"></i> {{ selectedDateFilter }}
         </button>
         <ul class="dropdown-menu">
-          <li *ngFor="let filter of dateFilters">
+          @for (filter of dateFilters; track filter) {
+          <li>
             <a class="dropdown-item" href="javascript:void(0)" (click)="setDateFilter(filter)">{{ filter }}</a>
           </li>
+          }
         </ul>
       </div>
       <button class="btn btn-secondary">
@@ -28,7 +30,8 @@
 
   <!-- Stats Grid -->
   <div class="stats-grid">
-    <div class="stat-card" *ngFor="let stat of stats">
+    @for (stat of stats; track stat.title) {
+    <div class="stat-card">
       <div class="stat-header">
         <div class="stat-title-wrap" [class]="stat.colorClass">
           <i [class]="stat.icon"></i>
@@ -47,11 +50,14 @@
         </div>
 
         <div class="stat-chart" [class]="stat.colorClass">
-          <div class="chart-bar" *ngFor="let h of stat.chartData" [style.height.%]="h * 10"></div>
+          @for (h of stat.chartData; track h) {
+          <div class="chart-bar" [style.height.%]="h * 10"></div>
+          }
         </div>
         <div class="stat-footer">VS last week</div>
       </div>
     </div>
+    }
   </div>
 
   <!-- Charts Section -->
@@ -109,21 +115,6 @@
       <cats-data-grid [rowData]="zoneData" [colDefs]="colDefs" [totalRecords]="zoneData.length"
         [paginationRequired]="false" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="false"
         [filterRequired]="false">
-
-        <ng-template #customTemplate let-row let-col="colDef">
-
-          <ng-container *ngIf="col.fieldName === 'zone'">
-            <span class="font-weight-bold">{{ row.zone }}</span>
-          </ng-container>
-
-          <ng-container *ngIf="col.fieldName === 'trend'">
-            <span class="stat-trend" [ngClass]="row.trendUp ? 'trend-up' : 'trend-down'">
-              <i class="fa-solid" [ngClass]="row.trendUp ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'"></i>
-              {{ row.trend }}
-            </span>
-          </ng-container>
-
-        </ng-template>
 
       </cats-data-grid>
     </div>
