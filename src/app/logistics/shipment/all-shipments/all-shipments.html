@@ -69,7 +69,7 @@
     <div class="table-responsive p-3">
       <cats-data-grid [rowData]="shipments" [colDefs]="colDefs" [totalRecords]="shipments.length"
         [paginationRequired]="true" [sortingRequired]="true" [selectedRowEmpty]="true" [draggable]="true"
-        [filterRequired]="false">
+        [filterRequired]="false" [showSkeleton]="showSkeleton" [skeletonColsLength]="24" [skeletonRowsLength]="4">
       </cats-data-grid>
     </div>
   </div>

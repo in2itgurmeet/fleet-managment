@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ShipmentService } from '../shipment.service';
 
 @Component({
   selector: 'app-create-shipment',
@@ -17,7 +18,11 @@ export class CreateShipment implements OnInit {
   weightSurcharge = 3.50;
   serviceFee = 2.50;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private shipmentService: ShipmentService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.shipmentForm = this.fb.group({
@@ -55,9 +60,20 @@ export class CreateShipment implements OnInit {
 
   onSubmit(): void {
     if (this.shipmentForm.valid) {
-      console.log('Shipment created', this.shipmentForm.value);
+      this.shipmentService.createShipment(this.shipmentForm.value).subscribe({
+        next: (res) => {
+          console.log('Shipment created successfully', res);
+          // Navigate to all shipments on success
+          this.router.navigate(['/logistics/shipments/all-shipments']);
+        },
+        error: (err) => {
+          console.error('Error creating shipment', err);
+        }
+      });
     } else {
       console.log('Form is invalid');
+      // Mark all fields as touched to show validation errors
+      this.shipmentForm.markAllAsTouched();
     }
   }
 }
